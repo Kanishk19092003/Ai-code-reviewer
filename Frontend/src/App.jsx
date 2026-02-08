@@ -5,7 +5,7 @@ import prism from "prismjs"
 import Markdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-import axios from 'axios'
+import api from "./services/api";
 import './App.css'
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
-    setReview(response.data)
-  }
+  const response = await api.post("/ai/get-review", { code });
+  setReview(response.data);
+}
 
   return (
     <>
