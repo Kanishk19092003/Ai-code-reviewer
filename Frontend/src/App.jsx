@@ -5,7 +5,7 @@ import prism from "prismjs"
 import Markdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-import api from "./services/api";
+import axios from 'axios'
 import './App.css'
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
   }, [])
 
   async function reviewCode() {
-  const response = await api.post("/ai/get-review", { code });
-  setReview(response.data);
-}
+    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
+    setReview(response.data)
+  }
 
   return (
     <>
@@ -33,7 +33,7 @@ function App() {
               value={code}
               onValueChange={code => setCode(code)}
               highlight={code => prism.highlight(code, prism.languages.javascript, "javascript")}
-              padding={20}
+              padding={10}
               style={{
                 fontFamily: '"Fira code", "Fira Mono", monospace',
                 fontSize: 16,
